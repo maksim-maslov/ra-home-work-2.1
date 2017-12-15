@@ -1,11 +1,43 @@
-'use strict'
+/******************************
+ * Ваша реализация компонента
+ *****************************/
+'use strict';
 
-const App = props => (
-  <div>
-    <Toolbar
-      filters={props.filters}
-      selected={'All'}
-      onSelectFilter={(filter) => console.log(filter)} />
-    <Portfolio projects={props.projects} />
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeFilter = this.changeFilter.bind(this);
+    this.state = {state: 'Flayers'};
+  }
+  
+  changeFilter(filter) {    
+    this.setState({
+      state: filter
+    });
+    
+  }
+  
+  filterProject() {
+    if (this.state.state == 'All') {
+      return this.props.projects;
+    } 
+    return this.props.projects.filter((el) => {
+      if (el.category == this.state.state) {
+        return el;
+      }
+    });     
+  }
+  
+  render() {    
+    return (
+      <div>
+        <Toolbar
+          filters={this.props.filters}
+          selected={this.state.state}
+          onSelectFilter={filter =>  this.setState({state: filter})} />
+        <Portfolio projects={this.filterProject()} />
+      </div>
+    );
+  }
+}
+
