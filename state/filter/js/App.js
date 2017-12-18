@@ -18,14 +18,13 @@ class App extends React.Component {
   }
   
   filterProject() {
-    if (this.state.state == 'All') {
-      return this.props.projects;
-    } 
-    return this.props.projects.filter((el) => {
-      if (el.category == this.state.state) {
-        return el;
-      }
-    });     
+    if (this.state.state != 'All') {
+      return this.props.projects.filter((el) => {
+	      if (el.category == this.state.state) {
+	        return el;
+	      }
+	    });
+    }
   }
   
   render() {    
