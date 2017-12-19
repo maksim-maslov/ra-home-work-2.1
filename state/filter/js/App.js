@@ -17,15 +17,17 @@ class App extends React.Component {
     
   }
   
-  filterProject() {
-    if (this.state.state != 'All') {
-      return this.props.projects.filter((el) => {
-	      if (el.category == this.state.state) {
-	        return el;
-	      }
-	    });
-    }
-  }
+	filterProject() {
+		if (this.state.state == 'All') {
+			return this.props.projects;
+		} else {
+			return this.props.projects.filter((el) => {
+				if (el.category == this.state.state) {
+					return el;
+				}
+			});
+		}
+	}
   
   render() {    
     return (
